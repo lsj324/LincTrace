@@ -20,7 +20,7 @@
 - 2024.03.27 ~ 2024.04.16 (3주간)****
 
   **실행영상**
-  
 
-https://github.com/lsj324/LincTrace/assets/170494075/17bc1a29-af41-4e2d-9e0f-c75d15b157fb
+
+https://github.com/lsj324/LincTrace/assets/170494075/ed1e9bc7-5d9d-4040-877f-8625695191d9
 
