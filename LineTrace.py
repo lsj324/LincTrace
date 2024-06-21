@@ -68,9 +68,7 @@ def LineTrace_frame(frame):
 
 # 소켓 생성 및 연결
 client_cam = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_mot = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_cam.connect((HOST_RPI, PORT))
-client_mot.connect((HOST_RPI, PORT))
 
 # 카메라 스레드 함수
 def camMain():
@@ -81,25 +79,29 @@ def camMain():
         ret, img = cap.read()
         results = model(img)
         annotated_frame = results[0].plot()
-
+        # 신호등이 인식될 경우
         if len(results[0].boxes.data) > 0:
             max_confidence_obj = max(results[0].boxes.data, key=lambda x: x[4])
             color = int(max_confidence_obj[5].item())
             
-            # 색상 정보 전송
+            # 색상 정보 전송(신호등이 빨간색일 경우: 13)
             cmd = 13
             cmd_byte = struct.pack('!B', cmd)
             client_cam.sendall(cmd_byte)
-            
+
+            # YOLO에서의 빨간색 신호등 번호값 송신
             color_byte = struct.pack('!B', color)
             client_cam.sendall(color_byte)
+        # 신호등 인식이 안될 경우
         else:
             LineTrace_frame(img)
             print(prev_command)
+            # 색상 정보 전송(신호등이 빨간색이 아닐 경우: 14)
             cmd = 14
             cmd_byte = struct.pack('!B', cmd)
             client_cam.sendall(cmd_byte)
             
+            # 라인트레이싱에 따른 좌우전진 명령 송신
             color_byte = struct.pack('!B', prev_command)
             client_cam.sendall(color_byte)
             
