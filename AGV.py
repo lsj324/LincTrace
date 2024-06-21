@@ -88,15 +88,8 @@ motThread.start()
 try:
     while True:
         # 클라이언트로부터 명령을 수신
-        cmd_byte = server_cam.recv(1)
-        cmd = struct.unpack('!B', cmd_byte)
-
-        if cmd[0] == 13:
-            color_byte = server_cam.recv(1)
-            color = struct.unpack('!B', color_byte)[0]
-        elif cmd[0] == 14:
-            color_byte = server_cam.recv(1)
-            color = struct.unpack('!B', color_byte)[0]
+        color_byte = server_cam.recv(1)
+        color = struct.unpack('!B', color_byte)[0]
         
 except KeyboardInterrupt:
     pass
