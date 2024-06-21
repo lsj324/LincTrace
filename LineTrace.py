@@ -79,7 +79,7 @@ def camMain():
         ret, img = cap.read()
         results = model(img)
         annotated_frame = results[0].plot()
-        # 신호등이 인식될 경우
+        # 빨간색 신호등이 인식될 경우
         if len(results[0].boxes.data) > 0:
             max_confidence_obj = max(results[0].boxes.data, key=lambda x: x[4])
             color = int(max_confidence_obj[5].item())
@@ -88,7 +88,7 @@ def camMain():
             color_byte = struct.pack('!B', color)
             client_cam.sendall(color_byte)
             
-        # 신호등 인식이 안될 경우
+        # 빨간색 신호등 인식이 안될 경우
         else:
             LineTrace_frame(img)
             print(prev_command)
