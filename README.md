@@ -2,7 +2,7 @@
 ![DALL·E 2024-06-20 14 31 01 - A detailed illustration of a line follower robot navigating along a black line on a white surface  The robot is small, with wheels and sensors positio](https://github.com/lsj324/LincTrace/assets/170494075/755556ca-d286-4a7c-9387-3c03b27007b1)
 
 
-##목표##
+**목표**
 
 - YOLO로 신호등을 인식하여 빨간불에는 멈추고 파란불에 움직이는 라인트레이서 개발
 
